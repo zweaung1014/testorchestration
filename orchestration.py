@@ -1,4 +1,4 @@
-from prefect import flow, task
+from prefect import flow, task, serve
 import random
 import time
 
@@ -38,8 +38,10 @@ def pick_up_salsa():
 def main():
     print("Starting run...")
     try:
-        home()
-        pick_up_salsa()
+        serve(
+            home(),
+            pick_up_salsa()
+        )
     except Exception as e:
         print(f"[flow] Error during flow execution: {e}")
     finally:
